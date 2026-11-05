@@ -12,16 +12,6 @@ library(readxl)
 ```
 
 ```{r}
-read_excel("data/nba_recruits.xlsx") |> glimpse()
-```
-
-```{r}
-read_excel("data/nba_recruits.xlsx") |>
-  select(rank, nba_mean_ws48, top_mean_wa, total_seasons, drafted) |>
-  summary()
-```
-
-```{r}
 #| cache: true
 basketball_tibble <- read_excel("data/nba_recruits.xlsx") |>
   mutate(
@@ -49,6 +39,15 @@ basketball_tibble |>
     aes(label = name),
     vjust = -0.5,
     size = 3
-  )
+  ) +
+  labs(
+    title = "High School Recruit Rank vs. Peak NBA Wins Added",
+    subtitle = "Top-ranked recruits tend to achieve higher peak NBA performance, with notable outliers",
+    x = "High School Recruit Rank",
+    y = "Peak Wins Added (3-Year Mean)",
+    color = "Career Tier",
+    caption = "Source: The Pudding (2019)"
+  ) +
+  theme_minimal()
 ```
 
